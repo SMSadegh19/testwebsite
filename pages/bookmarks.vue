@@ -11,7 +11,7 @@
           class="flex items-center gap-3 hover:bg-gray-100 dark:hover:bg-white/10 p-2 rounded-lg -m-2 text-sm min-w-0"
         >
           <UAvatar
-            :src="getThumbnail(bookmark.url)"
+            :src="bookmark.url"
             :alt="bookmark.label"
             :ui="{ rounded: 'rounded-md' }"
           />
@@ -20,7 +20,7 @@
           </p>
           <span class="flex-1"></span>
           <span class="text-xs font-medium text-gray-400 dark:text-gray-600">
-            {{ getHost(bookmark.url) }}
+            {{ bookmark.url }}
           </span>
         </a>
       </li>
@@ -118,22 +118,22 @@ const bookmarks = [
 ];
 
 // Safely extract host
-function getHost(url: string): string {
-  try {
-    const parsedUrl = new URL(url);
-    let host = parsedUrl.host;
-    return host.startsWith("www.") ? host.slice(4) : host;
-  } catch (e) {
-    console.warn("Invalid URL:", url);
-    return "invalid.url";
-  }
-}
+// function getHost(url: string): string {
+//   try {
+//     const parsedUrl = new URL(url);
+//     let host = parsedUrl.host;
+//     return host.startsWith("www.") ? host.slice(4) : host;
+//   } catch (e) {
+//     console.warn("Invalid URL:", url);
+//     return "invalid.url";
+//   }
+// }
 
-// Generate Clearbit thumbnail, or fallback
-function getThumbnail(url: string): string {
-  const host = getHost(url);
-  return host === "invalid.url"
-    ? "/fallback-logo.png" // Place a default logo in /public
-    : `https://logo.clearbit.com/${host}`;
-}
+// // Generate Clearbit thumbnail, or fallback
+// function getThumbnail(url: string): string {
+//   const host = getHost(url);
+//   return host === "invalid.url"
+//     ? "/fallback-logo.png" // Place a default logo in /public
+//     : `https://logo.clearbit.com/${host}`;
+// }
 </script>
